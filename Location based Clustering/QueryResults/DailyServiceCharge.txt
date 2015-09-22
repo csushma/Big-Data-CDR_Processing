@@ -1,0 +1,8 @@
+
+//Assume the company charges 19.2c per minutes
+Date: 20120701, Duration Sum: 1.6681724E7, Daily Net Profit: $3202891.01
+Date: 20120703, Duration Sum: 1761476.0, Daily Net Profit: $338203.39
+Date: 20120704, Duration Sum: 1154730.0, Daily Net Profit: $221708.16
+Date: 20120705, Duration Sum: 316639.0, Daily Net Profit: $60794.69
+Date: 20120706, Duration Sum: 4903445.0, Daily Net Profit: $941461.44
+Date: 20120707, Duration Sum: 7018680.0, Daily Net Profit: $1347586.56

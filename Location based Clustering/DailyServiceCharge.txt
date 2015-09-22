@@ -1,0 +1,27 @@
+//A mobile company usually charges users telephone calls using duration.
+//This query will group the data by date and sum durations.
+//We assume that the unit of duration is minute and charge per minute is 19.2c.
+
+class Call(line: String) extends java.io.Serializable {
+	val arr = line.split(",")
+	val Index = arr(0)
+	val UserId = arr(1)
+	val Date = arr(2)
+	val Time = arr(3)
+	val CallDuration = arr(4)
+	val Latitude = arr(5)
+	val Longitude = arr(6)
+}
+
+//Assume the company charges 19.2c per minutes
+val cent_per_minute = 19.2
+val data = sc.textFile("/usr/lib/hue/input/data_set.txt").map(line => line.replaceAll("\"", "")).map(line => new Call(line))
+val dateGroup = data.groupBy(d => d.Date).map(d => 
+{
+	val date = d._1
+	val duration_sum = d._2.map(_.CallDuration.toDouble).sum
+	val daily_net_profit_dollars = "%1.2f".format(duration_sum * cent_per_minute / 100)
+	"Date: " + date + ", Duration Sum: " + duration_sum + ", Daily Net Profit: $" + daily_net_profit_dollars
+})
+
+dateGroup.foreach(println)

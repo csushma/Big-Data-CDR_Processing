@@ -1,0 +1,64 @@
+//This query print out the calls made in an interval.
+//Knowing data transmission traffic is important because a certain time interval can have exceptionally and relatively high traffic.
+
+class Call(line: String) extends java.io.Serializable {
+	val arr = line.split(",")
+	val Index = arr(0)
+	val UserId = arr(1)
+	val Date = arr(2)
+	val Time = arr(3)
+	val CallDuration = arr(4)
+	val Latitude = arr(5)
+	val Longitude = arr(6)
+	
+	def output(): String = {
+		return "Index: " + Index + ", UserId: " + UserId + ", Date: " + Date + ", Time: " + Time + ", CallDuration: " + CallDuration + ", Latitude: " + Latitude + ", Longitude: " + Longitude
+	}
+}
+
+def IsValidDateTime(datetime: String): Boolean = {
+	if(datetime.length != 8)
+		return false
+	
+	try {
+		datetime.replaceAll(":","").toInt
+		return true
+	} catch { case _ : java.lang.NumberFormatException => false }
+	return true
+}
+
+class Interval(startDate: String, startTime: String, endDate: String, endTime: String) extends java.io.Serializable {
+	val StartDate: String = startDate
+	val StartTime: String = startTime
+	val EndDate: String = endDate
+	val EndTime: String = endTime
+	val StartDateTime = StartDate + StartTime.replaceAll(":","")
+	val EndDateTime = EndDate + EndTime.replaceAll(":","")
+	
+	def IsValid(): Boolean = {
+		if(IsValidDateTime(StartDate) && IsValidDateTime(StartTime) && IsValidDateTime(EndDate) && IsValidDateTime(EndTime))
+			return StartDateTime.toDouble <= EndDateTime.toDouble
+		return false
+	}
+}
+ 
+def IsInInterval(call: Call, interval: Interval):Boolean = {
+	//m(2) = date (e.g. 20120707), m(3) = time (e.g. 09:34:19)
+	val datetime = call.Date + call.Time.replaceAll(":","")
+	
+	//format must be the same - date: yyyyMMdd, time: hh:mm:ss	
+	if(interval.IsValid && IsValidDateTime(call.Date) && IsValidDateTime(call.Time)){
+		return interval.StartDateTime.toDouble <= datetime.toDouble && interval.EndDateTime.toDouble >= datetime.toDouble
+	}		
+	return false
+}
+
+
+//Data File
+val data = sc.textFile("/usr/lib/hue/input/data_set.txt").map(line => line.replaceAll("\"", "")).map(line => new Call(line))
+
+//An input for an interval
+val input = new Interval("20120701", "10:23:15", "20120701", "10:24:00")
+
+//filter
+data.filter(m => IsInInterval(m, input)).map(_.output).foreach(println)

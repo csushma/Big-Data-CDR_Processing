@@ -1,0 +1,49 @@
+DROP TABLE IF EXISTS Cluster1;
+DROP TABLE IF EXISTS Cluster2;
+DROP TABLE IF EXISTS Cluster3;
+DROP TABLE IF EXISTS Calldata;
+DROP TABLE IF EXISTS Cluster11;
+DROP TABLE IF EXISTS Cluster22;
+DROP TABLE IF EXISTS Cluster33;
+DROP TABLE IF EXISTS JoinCluster1;
+
+CREATE TABLE IF NOT EXISTS Cluster1 (latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+CREATE TABLE IF NOT EXISTS Cluster2 (latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+CREATE TABLE IF NOT EXISTS Cluster3 (latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+CREATE TABLE IF NOT EXISTS Calldata (sno INT, userid STRING, date STRING, time STRING,callduration DOUBLE,latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+
+LOAD DATA local INPATH '/usr/lib/hue/output/cluster1.txt' INTO TABLE Cluster1;
+LOAD DATA local INPATH '/usr/lib/hue/output/cluster2.txt' INTO TABLE Cluster2;
+LOAD DATA local INPATH '/usr/lib/hue/output/cluster3.txt' INTO TABLE Cluster3;
+LOAD DATA local INPATH '/usr/lib/hue/input/data_set.csv' INTO TABLE Calldata;
+
+CREATE TABLE IF NOT EXISTS Cluster11 (latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+INSERT OVERWRITE TABLE Cluster11
+SELECT DISTINCT SUBSTR(latitude,2), SUBSTR(longitude,1,length(longitude)-1) FROM Cluster1;
+
+CREATE TABLE IF NOT EXISTS Cluster22 (latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+INSERT OVERWRITE TABLE Cluster22
+SELECT DISTINCT SUBSTR(latitude,2), SUBSTR(longitude,1,length(longitude)-1) FROM Cluster2;
+
+CREATE TABLE IF NOT EXISTS Cluster33 (latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+INSERT OVERWRITE TABLE Cluster33
+SELECT DISTINCT SUBSTR(latitude,2), SUBSTR(longitude,1,length(longitude)-1) FROM Cluster3;
+
+CREATE TABLE IF NOT EXISTS JoinCluster1 (userid STRING, date STRING, time STRING,callduration DOUBLE,latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+INSERT OVERWRITE TABLE JoinCluster1
+SELECT Calldata.userid, Calldata.date, Calldata.time, Calldata.callduration, Calldata.latitude, Calldata.longitude 
+FROM Calldata, Cluster11 WHERE Cluster11.latitude = Calldata.latitude and Cluster11.longitude = Calldata.longitude;
+
+CREATE TABLE IF NOT EXISTS JoinCluster2 (userid STRING, date STRING, time STRING,callduration DOUBLE,latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+INSERT OVERWRITE TABLE JoinCluster2
+SELECT Calldata.userid, Calldata.date, Calldata.time, Calldata.callduration, Calldata.latitude, Calldata.longitude 
+FROM Calldata, Cluster22 WHERE Cluster22.latitude = Calldata.latitude and Cluster22.longitude = Calldata.longitude;
+
+CREATE TABLE IF NOT EXISTS JoinCluster3 (userid STRING, date STRING, time STRING,callduration DOUBLE,latitude STRING,longitude STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+INSERT OVERWRITE TABLE JoinCluster3
+SELECT Calldata.userid, Calldata.date, Calldata.time, Calldata.callduration, Calldata.latitude, Calldata.longitude 
+FROM Calldata, Cluster33 WHERE Cluster33.latitude = Calldata.latitude and Cluster33.longitude = Calldata.longitude;
+
+SELECT COUNT(*) FROM JoinCluster1;
+SELECT COUNT(*) FROM JoinCluster2;
+SELECT COUNT(*) FROM JoinCluster3;

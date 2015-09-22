@@ -1,0 +1,5 @@
+
+
+SELECT COUNT(DISTINCT userid) FROM JoinCluster1;
+SELECT COUNT(DISTINCT userid) FROM JoinCluster2;
+SELECT COUNT(DISTINCT userid) FROM JoinCluster3;

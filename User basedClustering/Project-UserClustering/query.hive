@@ -1,0 +1,100 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS PREDICTION (uid STRING, totalnum INT, distdate INT, maxTime INT, totalDur INT, cluster INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+LOAD DATA LOCAL INPATH '/usr/lib/hue/prediction/part-00001' OVERWRITE INTO TABLE PREDICTION;
+LOAD DATA LOCAL INPATH '/usr/lib/hue/prediction/part-00001' INTO TABLE PREDICTION;
+
+CREATE TABLE IF NOT EXISTS Cluster0 (uid STRING, totalnum INT, distdate INT, maxTime INT, totalDur INT) PARTITIONED BY (cluster INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS Cluster1 (uid STRING, totalnum INT, distdate INT, maxTime INT, totalDur INT) PARTITIONED BY (cluster INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS Cluster2 (uid STRING, totalnum INT, distdate INT, maxTime INT, totalDur INT) PARTITIONED BY (cluster INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS Cluster3 (uid STRING, totalnum INT, distdate INT, maxTime INT, totalDur INT) PARTITIONED BY (cluster INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS Cluster4 (uid STRING, totalnum INT, distdate INT, maxTime INT, totalDur INT) PARTITIONED BY (cluster INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+
+INSERT OVERWRITE TABLE Cluster0 PARTITION (cluster)
+SELECT uid, totalnum, distdate, maxTime, totalDur, cluster FROM PREDICTION WHERE cluster = '0';
+
+INSERT OVERWRITE TABLE Cluster1 PARTITION (cluster)
+SELECT uid, totalnum, distdate, maxTime, totalDur, cluster FROM PREDICTION WHERE cluster = '1';
+
+INSERT OVERWRITE TABLE Cluster2 PARTITION (cluster)
+SELECT uid, totalnum, distdate, maxTime, totalDur, cluster FROM PREDICTION WHERE cluster = '2';
+
+INSERT OVERWRITE TABLE Cluster3 PARTITION (cluster)
+SELECT uid, totalnum, distdate, maxTime, totalDur, cluster FROM PREDICTION WHERE cluster = '3';
+
+INSERT OVERWRITE TABLE Cluster4 PARTITION (cluster)
+SELECT uid, totalnum, distdate, maxTime, totalDur, cluster FROM PREDICTION WHERE cluster = '4';
+
+CREATE TABLE IF NOT EXISTS number_users (clusterId INT, userCnt INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS avg_num_calls (clusterId INT, avg_call INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS avg_dur (clusterId INT, avgdur INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS avg_dist_days (clusterId INT, avgdistdays INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+CREATE TABLE IF NOT EXISTS max_time_seg (clusterId INT, maxtimeseg INT, maxcnt INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
+
+//1. number of users in each cluster
+INSERT OVERWRITE TABLE number_users 
+select cluster, count(*) from cluster0 group by cluster
+UNION ALL
+select cluster, count(*) from cluster1 group by cluster
+UNION ALL
+select cluster, count(*) from cluster2 group by cluster
+UNION ALL
+select cluster, count(*) from cluster3 group by cluster
+UNION ALL
+select cluster, count(*) from cluster4 group by cluster;
+
+select * from number_users;
+
+//2. average number of calls in each cluster
+INSERT OVERWRITE TABLE avg_num_calls 
+select cluster, avg(totalnum) from cluster0 group by cluster
+UNION ALL
+select cluster, avg(totalnum) from cluster1 group by cluster
+UNION ALL
+select cluster, avg(totalnum) from cluster2 group by cluster
+UNION ALL
+select cluster, avg(totalnum) from cluster3 group by cluster
+UNION ALL
+select cluster, avg(totalnum) from cluster4 group by cluster;
+
+select * from avg_num_calls;
+
+//3. average duration for each cluster
+INSERT OVERWRITE TABLE avg_dur 
+select cluster, avg(totalDur) from cluster0 group by cluster
+UNION ALL
+select cluster, avg(totalDur) from cluster1 group by cluster
+UNION ALL
+select cluster, avg(totalDur) from cluster2 group by cluster
+UNION ALL
+select cluster, avg(totalDur) from cluster3 group by cluster
+UNION ALL
+select cluster, avg(totalDur) from cluster4 group by cluster;
+
+select * from avg_dur;
+
+//4. average days for each cluster
+INSERT OVERWRITE TABLE avg_dist_days 
+select cluster, avg(distdate) from cluster0 group by cluster
+UNION ALL
+select cluster, avg(distdate) from cluster1 group by cluster
+UNION ALL
+select cluster, avg(distdate) from cluster2 group by cluster
+UNION ALL
+select cluster, avg(distdate) from cluster3 group by cluster
+UNION ALL
+select cluster, avg(distdate) from cluster4 group by cluster;
+
+select * from avg_dist_days;
+
+//5. number of users of time period for each cluster
+INSERT OVERWRITE TABLE time_seg 
+select cluster, maxTime, count(*) from cluster0 group by cluster, maxTime
+UNION ALL
+select cluster, maxTime, count(*) from cluster1 group by cluster, maxTime
+UNION ALL
+select cluster, maxTime, count(*) from cluster2 group by cluster, maxTime
+UNION ALL
+select cluster, maxTime, count(*) from cluster3 group by cluster, maxTime
+UNION ALL
+select cluster, maxTime, count(*) from cluster4 group by cluster, maxTime;
+
+select * from time_seg;

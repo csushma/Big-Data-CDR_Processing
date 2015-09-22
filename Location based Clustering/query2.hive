@@ -1,0 +1,5 @@
+
+
+SELECT  DISTINCT userid FROM JoinCluster1 as A where A.callduration IN (select max(B.callduration) from JoinCluster1 as B);
+SELECT  DISTINCT userid FROM JoinCluster2 as A where A.callduration IN (select max(B.callduration) from JoinCluster2 as B);
+SELECT  DISTINCT userid FROM JoinCluster3 as A where A.callduration IN (select max(B.callduration) from JoinCluster3 as B);

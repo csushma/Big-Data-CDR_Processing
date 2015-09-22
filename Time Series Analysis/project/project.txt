@@ -1,0 +1,408 @@
+
+val file = sc.textFile("C:/Users/KarthikNithya/Desktop/semester3/bdm/practical/project/CDR.csv")//base RDD
+file.count()//total number of rows in the RDD
+
+val filter = file.filter(x => x.split(",")(3)).collect()
+
+val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+filterontime1.collect()
+filterontime1.saveasTextFile("C:/Users/KarthikNithya/Desktop/semester3/bdm/practical/project/out.txt")
+
+//val d = new java.
+
+d3.after(d1)
+
+def time_delta(y,x): 
+    from datetime import datetime
+    end = datetime.strptime(y, '%Y-%m-%dT%H:%M:%S.%f')
+    start = datetime.strptime(x, '%Y-%m-%dT%H:%M:%S.%f')
+    delta = (end-start).seconds
+    return delta
+
+
+
+filterontime1.collect()
+val filterontime2 = filterontime.filter(x=> x.split(",")(3)< "6:00:00")
+filterontime2.collect()
+
+val grouped  = filterontime1.flatMap(x=> x.split(",")).map(y => (y, 1)).reduceByKey(1,2)
+
+
+
+
+
+
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output.txt"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+
+
+//------------------------------------------------------------------------
+val file = sc.textFile("C:/Users/KarthikNithya/Desktop/semester3/bdm/practical/project/CDR.csv")
+file.count()
+ val d = new java.text.SimpleDateFormat("hh:mm:ss")
+ val d1 = new java.util.Date()
+
+
+ val d1 = d.parse("1:00:00")
+ val d2 = d.parse("2:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output1.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("2:00:00")
+ val d2 = d.parse("3:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output2.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+val d1 = d.parse("3:00:00")
+ val d2 = d.parse("4:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output3.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("4:00:00")
+ val d2 = d.parse("5:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output4.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("5:00:00")
+ val d2 = d.parse("6:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output5.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+
+ val d1 = d.parse("6:00:00")
+ val d2 = d.parse("7:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output6.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+
+
+//-----------------------------------------------------------------------------------
+
+
+
+ val d1 = d.parse("7:00:00")
+ val d2 = d.parse("8:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output7.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+val d1 = d.parse("8:00:00")
+ val d2 = d.parse("9:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output8.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("9:00:00")
+ val d2 = d.parse("10:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output9.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("10:00:00")
+ val d2 = d.parse("11:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output10.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("11:00:00")
+ val d2 = d.parse("12:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output11.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("12:00:00")
+ val d2 = d.parse("13:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output12.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("13:00:00")
+ val d2 = d.parse("14:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output13.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("14:00:00")
+ val d2 = d.parse("15:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output14.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("15:00:00")
+ val d2 = d.parse("16:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output15.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+
+writer.close()
+
+val d1 = d.parse("16:00:00")
+ val d2 = d.parse("17:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output16.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+val d1 = d.parse("17:00:00")
+ val d2 = d.parse("18:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output17.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------
+
+val file = sc.textFile("C:/Users/KarthikNithya/Desktop/semester3/bdm/practical/project/CDR.csv")
+file.count()
+ val d = new java.text.SimpleDateFormat("hh:mm:ss")
+ val d1 = new java.util.Date()
+ 
+val d1 = d.parse("18:00:00")
+ val d2 = d.parse("19:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output18.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("19:00:00")
+ val d2 = d.parse("20:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output19.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("20:00:00")
+ val d2 = d.parse("21:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output20.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("21:00:00")
+ val d2 = d.parse("22:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output21.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("22:00:00")
+ val d2 = d.parse("23:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output22.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("23:00:00")
+ val d2 = d.parse("23:59:59")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output23.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+ val d1 = d.parse("00:00:01")
+ val d2 = d.parse("01:00:00")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output0.csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+
+
+for (b <-0 until 24){
+CDR.parse(b)
+}
+object CDR  {
+def parse(a:Int){
+val d1 = d.parse(a + ":00:00")
+ val d2 = d.parse((a+1) + ":59:59")
+ val filterontime = file.filter(x=> d.parse(x.split(",")(3)).after(d1))
+val filterontime1 = filterontime.filter(x=> d.parse(x.split(",")(3)).before(d2))
+val array = filterontime1.collect()
+import java.io._
+val op = "c:/Users/KarthikNithya/Desktop/output" + a + ".csv"
+val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(op)))
+for (x <- array) {
+  writer.write(x + "\n")
+}
+writer.close()
+}
+}
+
+
